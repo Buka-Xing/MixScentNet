@@ -1,0 +1,10 @@
+=== 5-Fold Cross Validation Results ===
+Fold 1 - PLCC: 0.5132, KRCC: 0.3493, RMSE: 0.2923
+Fold 2 - PLCC: 0.6602, KRCC: 0.4777, RMSE: 0.2654
+Fold 3 - PLCC: 0.6484, KRCC: 0.4589, RMSE: 0.2452
+Fold 4 - PLCC: 0.5897, KRCC: 0.4061, RMSE: 0.2602
+Fold 5 - PLCC: 0.6761, KRCC: 0.4732, RMSE: 0.2318
+------------------------------
+Average PLCC: 0.6175
+Average KRCC: 0.4330
+Average RMSE: 0.2590

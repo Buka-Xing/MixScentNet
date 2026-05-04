@@ -1,0 +1,39 @@
+========== Cross-Validation Split: cv0 ==========
+Best epoch: 4789  |  Best PLCC: 0.7519
+Test Metrics on this split:
+  - pearson: 0.7519
+  - rmse: 0.1295
+  - kendall: 0.5790
+
+========== Cross-Validation Split: cv1 ==========
+Best epoch: 4208  |  Best PLCC: 0.7561
+Test Metrics on this split:
+  - pearson: 0.7561
+  - rmse: 0.1249
+  - kendall: 0.5509
+
+========== Cross-Validation Split: cv2 ==========
+Best epoch: 4659  |  Best PLCC: 0.8070
+Test Metrics on this split:
+  - pearson: 0.8070
+  - rmse: 0.1195
+  - kendall: 0.6109
+
+========== Cross-Validation Split: cv3 ==========
+Best epoch: 2895  |  Best PLCC: 0.7370
+Test Metrics on this split:
+  - pearson: 0.7370
+  - rmse: 0.1245
+  - kendall: 0.5353
+
+========== Cross-Validation Split: cv4 ==========
+Best epoch: 1323  |  Best PLCC: 0.7272
+Test Metrics on this split:
+  - pearson: 0.7272
+  - rmse: 0.1214
+  - kendall: 0.5741
+
+========== 5-Fold Average ==========
+  pearson: 0.7558
+  rmse: 0.1240
+  kendall: 0.5700

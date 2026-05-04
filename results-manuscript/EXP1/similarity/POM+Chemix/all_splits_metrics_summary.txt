@@ -1,0 +1,36 @@
+========== Cross-Validation Split: cv0 ==========
+Best Test Metric (from Early Stopping): 0.6776
+Test Metrics on this split:
+  - pearson: 0.6644
+  - rmse: 0.1273
+  - kendall: 0.5199
+
+========== Cross-Validation Split: cv1 ==========
+Best Test Metric (from Early Stopping): 0.7246
+Test Metrics on this split:
+  - pearson: 0.7123
+  - rmse: 0.1398
+  - kendall: 0.5139
+
+========== Cross-Validation Split: cv2 ==========
+Best Test Metric (from Early Stopping): 0.7655
+Test Metrics on this split:
+  - pearson: 0.7570
+  - rmse: 0.1240
+  - kendall: 0.5780
+
+========== Cross-Validation Split: cv3 ==========
+Best Test Metric (from Early Stopping): 0.7690
+Test Metrics on this split:
+  - pearson: 0.7558
+  - rmse: 0.1266
+  - kendall: 0.5657
+
+========== Cross-Validation Split: cv4 ==========
+Best Test Metric (from Early Stopping): 0.7953
+Test Metrics on this split:
+  - pearson: 0.7888
+  - rmse: 0.1211
+  - kendall: 0.6068
+
+Avg Pearson: 0.7357, Avg rmse: 0.1278, Avg kendall: 0.5569

@@ -1,0 +1,45 @@
+========== Cross-Validation Split: cv0 ==========
+  Train size: 692  |  Test size: 173
+Test Metrics:
+  - Pearson (PLCC): 0.4543
+  - Kendall (KRCC): 0.3682
+  - RMSE:           0.4899
+  - R2:             -5.8466
+
+========== Cross-Validation Split: cv1 ==========
+  Train size: 692  |  Test size: 173
+Test Metrics:
+  - Pearson (PLCC): 0.3283
+  - Kendall (KRCC): 0.2307
+  - RMSE:           0.5080
+  - R2:             -6.2635
+
+========== Cross-Validation Split: cv2 ==========
+  Train size: 692  |  Test size: 173
+Test Metrics:
+  - Pearson (PLCC): 0.4922
+  - Kendall (KRCC): 0.3719
+  - RMSE:           0.5094
+  - R2:             -5.3895
+
+========== Cross-Validation Split: cv3 ==========
+  Train size: 692  |  Test size: 173
+Test Metrics:
+  - Pearson (PLCC): 0.4019
+  - Kendall (KRCC): 0.2844
+  - RMSE:           0.5161
+  - R2:             -7.0157
+
+========== Cross-Validation Split: cv4 ==========
+  Train size: 692  |  Test size: 173
+Test Metrics:
+  - Pearson (PLCC): 0.4003
+  - Kendall (KRCC): 0.3216
+  - RMSE:           0.5040
+  - R2:             -7.1288
+
+===== Average over 5 folds =====
+  Avg Pearson (PLCC): 0.4154
+  Avg Kendall (KRCC): 0.3154
+  Avg RMSE:           0.5055
+  Avg R2:             -6.3288
