@@ -1,0 +1,36 @@
+========== Cross-Validation Split: cv0 ==========
+Best Test Metric (from Early Stopping): PLCC(label)=0.6912, PLCC(sample)=0.7866
+Test Metrics on this split:
+  - PLCC(label): 0.6912
+  - PLCC(sample): 0.7866
+  - cos-dist: 0.1366
+
+========== Cross-Validation Split: cv1 ==========
+Best Test Metric (from Early Stopping): PLCC(label)=0.6442, PLCC(sample)=0.7561
+Test Metrics on this split:
+  - PLCC(label): 0.6442
+  - PLCC(sample): 0.7561
+  - cos-dist: 0.1535
+
+========== Cross-Validation Split: cv2 ==========
+Best Test Metric (from Early Stopping): PLCC(label)=0.6405, PLCC(sample)=0.7465
+Test Metrics on this split:
+  - PLCC(label): 0.6405
+  - PLCC(sample): 0.7465
+  - cos-dist: 0.1616
+
+========== Cross-Validation Split: cv3 ==========
+Best Test Metric (from Early Stopping): PLCC(label)=0.6531, PLCC(sample)=0.7520
+Test Metrics on this split:
+  - PLCC(label): 0.6531
+  - PLCC(sample): 0.7520
+  - cos-dist: 0.1592
+
+========== Cross-Validation Split: cv4 ==========
+Best Test Metric (from Early Stopping): PLCC(label)=0.6394, PLCC(sample)=0.7642
+Test Metrics on this split:
+  - PLCC(label): 0.6394
+  - PLCC(sample): 0.7642
+  - cos-dist: 0.1505
+
+Avg PLCC(sample): 0.7611, Avg PLCC(label): 0.6537, Avg cosine_dist: 0.1523

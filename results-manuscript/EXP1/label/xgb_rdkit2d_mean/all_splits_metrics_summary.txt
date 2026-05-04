@@ -1,0 +1,33 @@
+========== Cross-Validation Split: cv0 ==========
+  Train size: 417  |  Test size: 105
+Test Metrics:
+  - Avg per-sample PLCC:        0.7329
+  - Avg per-sample CosDist:     0.1685
+
+========== Cross-Validation Split: cv1 ==========
+  Train size: 417  |  Test size: 105
+Test Metrics:
+  - Avg per-sample PLCC:        0.6907
+  - Avg per-sample CosDist:     0.1960
+
+========== Cross-Validation Split: cv2 ==========
+  Train size: 418  |  Test size: 104
+Test Metrics:
+  - Avg per-sample PLCC:        0.7179
+  - Avg per-sample CosDist:     0.1772
+
+========== Cross-Validation Split: cv3 ==========
+  Train size: 418  |  Test size: 104
+Test Metrics:
+  - Avg per-sample PLCC:        0.7353
+  - Avg per-sample CosDist:     0.1652
+
+========== Cross-Validation Split: cv4 ==========
+  Train size: 418  |  Test size: 104
+Test Metrics:
+  - Avg per-sample PLCC:        0.7279
+  - Avg per-sample CosDist:     0.1656
+
+===== Average over 5 folds =====
+  Avg PLCC (per-sample mean):    0.7210
+  Avg CosDist (per-sample mean): 0.1745
