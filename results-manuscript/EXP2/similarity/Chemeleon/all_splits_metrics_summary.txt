@@ -1,0 +1,36 @@
+========== Cross-Validation Split: cv0 ==========
+Best Test Metric (from Early Stopping): 2084.0000
+Test Metrics on this split:
+  - PLCC: 0.6082
+  - KRCC: 0.4111
+  - RMSE: 0.2076
+
+========== Cross-Validation Split: cv1 ==========
+Best Test Metric (from Early Stopping): 2047.0000
+Test Metrics on this split:
+  - PLCC: 0.6052
+  - KRCC: 0.3780
+  - RMSE: 0.2215
+
+========== Cross-Validation Split: cv2 ==========
+Best Test Metric (from Early Stopping): 2023.0000
+Test Metrics on this split:
+  - PLCC: 0.4562
+  - KRCC: 0.3454
+  - RMSE: 0.3036
+
+========== Cross-Validation Split: cv3 ==========
+Best Test Metric (from Early Stopping): 2089.0000
+Test Metrics on this split:
+  - PLCC: 0.6561
+  - KRCC: 0.4567
+  - RMSE: 0.2274
+
+========== Cross-Validation Split: cv4 ==========
+Best Test Metric (from Early Stopping): 3078.0000
+Test Metrics on this split:
+  - PLCC: 0.6457
+  - KRCC: 0.4529
+  - RMSE: 0.2781
+
+Avg PLCC: 0.5943, Avg KRCC: 0.4088, Avg RMSE: 0.2476, 

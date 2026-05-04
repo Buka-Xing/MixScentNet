@@ -1,0 +1,31 @@
+========== Per-Fold Test Metrics ==========
+
+--- Fold: cv0 ---
+  pearson: 0.7101
+  rmse: 0.1306
+  kendall: 0.5136
+
+--- Fold: cv1 ---
+  pearson: 0.6435
+  rmse: 0.1480
+  kendall: 0.4128
+
+--- Fold: cv2 ---
+  pearson: 0.4406
+  rmse: 0.1535
+  kendall: 0.3375
+
+--- Fold: cv3 ---
+  pearson: 0.6272
+  rmse: 0.1634
+  kendall: 0.4004
+
+--- Fold: cv4 ---
+  pearson: 0.6408
+  rmse: 0.1513
+  kendall: 0.4366
+
+========== 5-Fold Average ==========
+  pearson: 0.6124
+  rmse: 0.1494
+  kendall: 0.4202

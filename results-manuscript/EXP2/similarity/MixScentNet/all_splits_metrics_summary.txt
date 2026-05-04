@@ -1,0 +1,36 @@
+========== Cross-Validation Split: cv0 ==========
+Stopped at epoch: 1122
+Test Metrics on this split:
+  - PLCC: 0.7513
+  - KRCC: 0.5123
+  - RMSE: 0.1567
+
+========== Cross-Validation Split: cv1 ==========
+Stopped at epoch: 1138
+Test Metrics on this split:
+  - PLCC: 0.6964
+  - KRCC: 0.3933
+  - RMSE: 0.1676
+
+========== Cross-Validation Split: cv2 ==========
+Stopped at epoch: 1083
+Test Metrics on this split:
+  - PLCC: 0.5091
+  - KRCC: 0.3602
+  - RMSE: 0.2073
+
+========== Cross-Validation Split: cv3 ==========
+Stopped at epoch: 1138
+Test Metrics on this split:
+  - PLCC: 0.6947
+  - KRCC: 0.4219
+  - RMSE: 0.1789
+
+========== Cross-Validation Split: cv4 ==========
+Stopped at epoch: 2375
+Test Metrics on this split:
+  - PLCC: 0.7108
+  - KRCC: 0.4711
+  - RMSE: 0.1630
+
+Avg PLCC: 0.6724, Avg KRCC: 0.4318, Avg RMSE: 0.1747
