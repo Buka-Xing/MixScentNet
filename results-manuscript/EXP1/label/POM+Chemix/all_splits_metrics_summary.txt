@@ -1,0 +1,31 @@
+========== Cross-Validation Split: cv0 ==========
+Best Test Metric (from Early Stopping): 0.7436
+Test Metrics on this split:
+  - pearson: 0.7332
+  - cosine_dist: 0.1676
+
+========== Cross-Validation Split: cv1 ==========
+Best Test Metric (from Early Stopping): 0.7059
+Test Metrics on this split:
+  - pearson: 0.7010
+  - cosine_dist: 0.1925
+
+========== Cross-Validation Split: cv2 ==========
+Best Test Metric (from Early Stopping): 0.7205
+Test Metrics on this split:
+  - pearson: 0.7124
+  - cosine_dist: 0.1793
+
+========== Cross-Validation Split: cv3 ==========
+Best Test Metric (from Early Stopping): 0.7603
+Test Metrics on this split:
+  - pearson: 0.7545
+  - cosine_dist: 0.1552
+
+========== Cross-Validation Split: cv4 ==========
+Best Test Metric (from Early Stopping): 0.7418
+Test Metrics on this split:
+  - pearson: 0.7377
+  - cosine_dist: 0.1613
+
+Avg Pearson: 0.7277384757995605, Avg cosine_dist: 0.1711931347846985
