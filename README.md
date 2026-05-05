@@ -151,7 +151,7 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 | --- | --- |
 | Table 1 (standard 5-fold CV) | `MixScentNet_Label.py --split random_cv`, `MixScentNet_Similarity.py --split random_cv` + logs in `results-manuscript/EXP1/` |
 | Table 2 (unseen-molecule CV) | Same scripts with the `--split random_cv_unseen` flag + logs in `results-manuscript/EXP2/` |
-| Figure 4 + Appendix E (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
+| Figure 2 + Appendix A.2 (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
 
 ---
 
