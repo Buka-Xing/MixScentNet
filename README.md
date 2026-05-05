@@ -54,7 +54,7 @@ The codebase has been tested under the following environment:
 | CPU | Intel Core i9-9900K |
 | GPU | NVIDIA RTX 3090 (24 GB) |
 | CUDA | 11.8 |
-| Python | 3.10 |
+| Python | 3.11.2 |
 
 ### Python Dependencies
 
