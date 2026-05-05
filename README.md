@@ -127,7 +127,6 @@ This script:
 - Trains MixScentNet on two of {Snitz, Ravia, Bushdid} and evaluates on the held-out subset.
 - For every test mixture pair, records the geometric mean √(n₁·n₂) and the predicted perceptual distance.
 - Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
-- Cycles through all three held-out configurations to reproduce the main-text result and the two additional results in Appendix A.2.
 
 ---
 
