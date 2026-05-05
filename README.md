@@ -25,18 +25,16 @@ MixScentNet/
 ├── MixScentNet_Similarity.py         # Entry point: DREAM2024 perceptual similarity
 ├── MixScentNet_OW_train&test.py      # Entry point: Olfactory White reproduction
 │
-├── backbones/                        # Model implementations
-│   ├── dmpnn/                        # Single-molecule encoder
-│   │   └── ...                       # D-MPNN instantiation (Mordred-target pretraining)
-│   └── gat/                          # Mixture-level encoder
-│       └── ...                       # 3-layer residual GATv2 with PNA readout
+├── backbones/                        # Model implementations and dataset loader
+│   ├── DMPNN.py                      # DMPNN Instantiation
+│   ├── dataloader.py                 # Dataset loader
+│   └── model_gat.py                  # 3-layer residual GATv2 with PNA readout
 │
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
 │   └── DREAM2024/                    # Mixture pairs + perceptual distances
-│                                     #   (Snitz, Ravia, Bushdid subsets)
 │
-└── results-manuscript/               # Training logs & results in the paper
+└── results-manuscript/               # Training logs & results in the mainuscript
     ├── DREAM2025/                    # 5-fold logs + per-fold metrics
     ├── DREAM2024/                    # 5-fold logs + per-fold metrics
     └── olfactory_white/              # 3 LOSO splits + scatter data
@@ -48,55 +46,80 @@ MixScentNet/
 
 The codebase has been tested under the following environment:
 
-| Component        | Version                          |
-| ---------------- | -------------------------------- |
-| OS               | Ubuntu 16.04                     |
-| CPU              | Intel Core i9-9900K              |
-| GPU              | NVIDIA RTX 3090 (24 GB)          |
-| Python           | 3.9                              |
-| PyTorch          | 1.13                             |
-| DGL              | 1.1                              |
-| RDKit            | 2023.03                          |
-| Mordred          | 1.2.0                            |
-| Chemprop         | 2.0                              |
+| Component | Version |
+| --- | --- |
+| OS | Ubuntu 16.04 |
+| CPU | Intel Core i9-9900K |
+| GPU | NVIDIA RTX 3090 (24 GB) |
+| CUDA | 11.8 |
+| Python | 3.10 |
 
-A complete `requirements.txt` will be released along with the de-anonymized code upon acceptance.
+### Python Dependencies
+
+| Package | Version |
+| --- | --- |
+| `torch` | 2.3.0+cu118 |
+| `dgl` | 2.2.1+cu118 |
+| `chemprop` | 2.2.3 |
+| `rdkit` | 2026.3.1 |
+| `scikit-learn` | 1.8.0 |
+| `scipy` | 1.17.1 |
+| `numpy` | 2.4.4 |
+| `pandas` | 3.0.2 |
+| `torchmetrics` | 1.9.0 |
+| `matplotlib` | 3.10.9 |
+| `tqdm` | 4.67.3 |
 
 ---
 
 ## 🚀 Quick Start
 
-After setting up the environment, the three main experiments reported in the paper can be reproduced with single commands:
+### 0. Environment settings
 
+```bash
+# 1. Create a fresh conda environment
+conda create -n mixscentnet python=3.10 -y
+conda activate mixscentnet
+
+# 2. Install PyTorch with CUDA 11.8
+pip install torch==2.3.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+
+# 3. Install DGL with matching CUDA build
+pip install dgl==2.2.1+cu118 -f https://data.dgl.ai/wheels/cu118/repo.html
+
+# 4. Install the remaining dependencies
+pip install -r requirements.txt
+```
 ### 1. Label Prediction on DREAM2025 (Table 1, Table 2)
 
 ```bash
-python MixScentNet_Label.py
+python MixScentNet_Label.py --split random_cv --loss HuberLoss
 ```
 
 This script:
 - Loads the DREAM2025 mixture dataset from `datasets/DREAM2025/`.
-- Initializes the pretrained D-MPNN encoder from `backbones/dmpnn/`.
-- Builds the mixture-as-graph and applies the 3-layer residual GATv2 from `backbones/gat/`.
-- Performs **5-fold cross-validation** (80% / 20% train–test) with the weighted Huber loss described in the paper.
+- Performs **5-fold cross-validation** (80% / 20% train–test) with the Huber loss described in the paper.
 - Reports PLCC-sam (↑) and cos-dist (↓) per fold and aggregated mean ± deviation.
-
+- '--split' can be chosen as {'random_cv', 'random_cv_unseen'} for reproducing results in TABLE 1&2
+- '--loss' can be chosen as {'HuberLoss', 'MSELoss','MAELoss','MeanPLCCLoss'} 
 ### 2. Perceptual Similarity on DREAM2024 (Table 1, Table 2)
 
 ```bash
-python MixScentNet_Similarity.py
+python MixScentNet_Similarity.py --split random_cv --loss MAELoss
 ```
 
 This script:
 - Loads the DREAM2024 mixture-pair dataset (Snitz + Ravia + Bushdid subsets) from `datasets/DREAM2024/`.
-- Encodes each mixture in a pair independently, then computes the L1 distance between the L1-normalized mixture embeddings as the predicted perceptual distance.
+- Encodes each mixture in a pair independently, then computes the L1 distance between the mixture embeddings as the predicted perceptual distance.
 - Performs **5-fold cross-validation** under the same protocol as the label task.
 - Reports PLCC (↑) and KRCC (↑) per fold and aggregated mean ± deviation.
-
+- '--split' can be chosen as {'random_cv', 'random_cv_unseen'} for reproducing results in TABLE 1&2
+- '--loss' can be chosen as {'MAELoss','MSELoss','PLCCLoss'}
+ 
 ### 3. Olfactory White Reproduction (Section 5 + Appendix E)
 
 ```bash
-python "MixScentNet_OW_train&test.py"
+python "MixScentNet_OW_train&test.py" --train-sources Snitz+Ravia
 ```
 
 This script:
@@ -104,39 +127,7 @@ This script:
 - Trains MixScentNet on two of {Snitz, Ravia, Bushdid} and evaluates on the held-out subset.
 - For every test mixture pair, records the geometric mean √(n₁·n₂) and the predicted perceptual distance.
 - Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
-- Cycles through all three held-out configurations to reproduce the main-text result and the two additional results in Appendix E.
-
-> **Note:** The shell-special character `&` in the filename should be quoted (e.g. `"..."` in bash) when invoking this script.
-
----
-
-## 📂 Folder Details
-
-### `backbones/`
-
-| Sub-folder | Contents |
-| --- | --- |
-| `dmpnn/` | Reproduces the **MaskedDescriptorsMPNN** pretraining described in Appendix B.1: a Bond-centric D-MPNN with hidden dim 2048, depth 6, mean aggregation, and a regression FFN that predicts standardized + Winsorized Mordred descriptors under a 15%-masked MSE objective. The module exposes a `fingerprint(bmg)` function that returns a 2048-dim per-molecule embedding used by all downstream entry points. |
-| `gat/` | Implements the mixture-level encoder: a 3-layer residual GATv2 stack with multi-head attention (concat) at layers 1–2 and a single-head layer at layer 3, each followed by a residual projection, ELU, LayerNorm, and dropout. The graph-level readout uses **Principal Neighborhood Aggregation (PNA)**, concatenating mean / std / min / max statistics and projecting back to the hidden dimension via an FFN, as described in Section 3.2. |
-
-### `datasets/`
-
-| Sub-folder | Contents |
-| --- | --- |
-| `DREAM2025/` | The 650+ mixtures (2/3/5/10 components each) annotated with 51-dim RATA perceptual descriptors. Stored as preprocessed `.pt` / `.csv` splits ready for the 5-fold protocol. |
-| `DREAM2024/` | The 507 mixture pairs (731 unique mixtures, 168 unique molecules) drawn from the Snitz, Ravia, and Bushdid subsets. Per-pair perceptual distances are linearly normalized to [0, 1] following the DREAM2024 organizers' protocol. Subset membership is preserved to support the leave-one-subset-out olfactory-white protocol. |
-
-> **Pretraining data not included.** The pretraining corpus (~1M filtered SMILES strings derived from PubChem; see Appendix A.1) is large and is not bundled with this repository. Pretrained encoder weights are distributed instead, located inside `backbones/dmpnn/`.
-
-### `results-manuscript/`
-
-This folder contains the **training logs and result records that back every number reported in the paper**, organized to mirror the manuscript's table and figure structure:
-
-- `DREAM2025/` — per-fold training curves, best-epoch checkpoints' metrics, and aggregated mean ± deviation that appear in Table 1 / Table 2 (label-prediction columns).
-- `DREAM2024/` — same as above for the similarity-prediction columns.
-- `olfactory_white/` — per-split scatter data, regression fits, and Pearson/Spearman statistics that produce Figure 4 (main paper) and Figure A.1–A.2 (Appendix E).
-
-Reviewers can use these logs to verify that the reported numbers reflect actual training runs rather than post-hoc selection.
+- Cycles through all three held-out configurations to reproduce the main-text result and the two additional results in Appendix A.2.
 
 ---
 
@@ -146,21 +137,20 @@ Reviewers can use these logs to verify that the reported numbers reflect actual 
 | --- | --- |
 | Random seeds | Fixed per fold (`fold_idx = 0…4`); reported numbers are the mean across seeds. |
 | Cross-validation | 5-fold, 80% / 20% train–test, **no separate validation set**; the best-PLCC epoch per fold is selected. |
-| Hardware | Single NVIDIA RTX 3090. End-to-end training takes ~6 hours for DREAM2025 and ~4 hours for DREAM2024 (per 5-fold sweep). |
+| Hardware | Single NVIDIA RTX 3090. |
 | Comparability | All baselines (XGBoost+RDKit/POM/MOLT5, CheMeleon, MolSets, POM+CheMix, POMMix) are evaluated on **the exact same fold splits** used for MixScentNet. |
 
-All hyperparameters, optimizer settings, and loss weighting schemes follow Appendix B and are encoded as defaults in the three entry-point scripts; no per-experiment manual tuning is required to reproduce the reported numbers.
+All hyperparameters, optimizer settings, and loss weighting schemes follow Appendix and are encoded as defaults in the three entry-point scripts; no per-experiment manual tuning is required to reproduce the reported numbers.
 
 ---
 
-## 📊 Mapping from Code to Paper
+## 📊 Mapping from Code to Main Results in the Paper
 
 | Manuscript element | Reproducing artifact |
 | --- | --- |
-| Table 1 (standard 5-fold CV) | `MixScentNet_Label.py`, `MixScentNet_Similarity.py` + logs in `results-manuscript/DREAM2025/`, `results-manuscript/DREAM2024/` |
-| Table 2 (unseen-molecule CV) | Same scripts with the `--split unseen_molecule` flag (default protocol described in Appendix A.3) |
-| Figure 4 + Appendix E (olfactory white) | `MixScentNet_OW_train&test.py` + scatter data in `results-manuscript/olfactory_white/` |
-| Ablation tables (Appendix D) | Configurable variants are selectable from the entry-point scripts via CLI flags; logs for each variant are deposited under `results-manuscript/<task>/ablation_*/`. |
+| Table 1 (standard 5-fold CV) | `MixScentNet_Label.py --split random_cv`, `MixScentNet_Similarity.py --split random_cv` + logs in `results-manuscript/EXP1/` |
+| Table 2 (unseen-molecule CV) | Same scripts with the `--split random_cv_unseen` flag + logs in `results-manuscript/EXP2/` |
+| Figure 4 + Appendix E (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
 
 ---
 
