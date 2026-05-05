@@ -7,14 +7,13 @@
 
 ## ⚠️ Anonymous Submission Notice
 
-This repository accompanies an **anonymous** submission to NeurIPS 2026 and is shared via an anonymous link **for review purposes only**. In compliance with the double-blind reviewing policy:
+This repository accompanies an **anonymous** submission to NeurIPS 2026 and is shared via an anonymous link **for review purposes only**. Any redistribution, training of derivative models, or use beyond verification of the reported results is **not authorized** at this stage. In compliance with the double-blind reviewing policy:
 
 - All author names, institutional identifiers, acknowledgements, and personal URLs have been removed from the codebase.
 - The repository is provided **strictly for reviewer inspection of the methodology and reported results** and must not be redistributed.
 - The **pretrained model weights, processed pre-training datasets**, and a permissive open-source license will be released **upon acceptance**.
 
 If reviewers identify any residual de-anonymizing content, we kindly ask them to flag it in their reviews so that we can remedy it promptly.
-
 ---
 
 ## 📁 Repository Structure
