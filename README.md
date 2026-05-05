@@ -35,8 +35,8 @@ MixScentNet/
 │   └── DREAM2024/                    # Mixture pairs + perceptual distances
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
-    ├── DREAM2025/                    # 5-fold logs + per-fold metrics
-    ├── DREAM2024/                    # 5-fold logs + per-fold metrics
+    ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
+    ├── EXP2/                         # 5-fold logs + per-fold metrics for TABLE 2
     └── olfactory_white/              # 3 LOSO splits + scatter data
 ```
 
