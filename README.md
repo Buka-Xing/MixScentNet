@@ -118,7 +118,7 @@ This script:
 - '--split' can be chosen as {'random_cv', 'random_cv_unseen'} for reproducing results in TABLE 1&2
 - '--loss' can be chosen as {'MAELoss','MSELoss','PLCCLoss'}
  
-### 3. Olfactory White Reproduction (Section 5 + Appendix E)
+### 3. Olfactory White Reproduction (Section 4.4 + Appendix A.2)
 
 ```bash
 python "MixScentNet_OW_train&test.py" --train-sources Snitz+Ravia
@@ -127,7 +127,7 @@ python "MixScentNet_OW_train&test.py" --train-sources Snitz+Ravia
 This script:
 - Implements the **leave-one-subset-out** protocol on DREAM2024.
 - Trains MixScentNet on two of {Snitz, Ravia, Bushdid} and evaluates on the held-out subset.
-- For every test mixture pair, records the geometric mean √(n₁·n₂) and the predicted perceptual distance.
+- For every test mixture pair, record the geometric mean √(n₁·n₂) and the predicted perceptual distance.
 - Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
 
 ---
