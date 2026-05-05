@@ -11,7 +11,7 @@ This repository accompanies an **anonymous** submission to NeurIPS 2026 and is s
 
 - All author names, institutional identifiers, acknowledgements, and personal URLs have been removed from the codebase.
 - The repository is provided **strictly for reviewer inspection of the methodology and reported results** and must not be redistributed.
-- The full source code, pretrained model weights, processed datasets, and a permissive open-source license will be released **upon acceptance**.
+- The full source code, **pretrained model weights**, processed pre-training datasets, and a permissive open-source license will be released **upon acceptance**.
 
 If reviewers identify any residual de-anonymizing content, we kindly ask them to flag it in their reviews so that we can remedy it promptly.
 
@@ -150,12 +150,6 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 | Table 1 (standard 5-fold CV) | `MixScentNet_Label.py --split random_cv`, `MixScentNet_Similarity.py --split random_cv` + logs in `results-manuscript/EXP1/` |
 | Table 2 (unseen-molecule CV) | Same scripts with the `--split random_cv_unseen` flag + logs in `results-manuscript/EXP2/` |
 | Figure 4 + Appendix E (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
-
----
-
-## 📝 Citation
-
-A BibTeX entry will be provided after the double-blind review process. For the duration of the review, please refer to the submission via its OpenReview ID.
 
 ---
 
