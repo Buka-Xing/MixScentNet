@@ -134,12 +134,12 @@ This script:
 
 | Aspect | Setting |
 | --- | --- |
-| Random seeds | Fixed per fold (`fold_idx = 0…4`); reported numbers are the mean across seeds. |
+| Random seeds | Fixed per fold (`fold_idx = 0…4`); reported results are the mean±std across folds. |
 | Cross-validation | 5-fold, 80% / 20% train–test, **no separate validation set**; the best-PLCC epoch per fold is selected. |
 | Hardware | Single NVIDIA RTX 3090. |
 | Comparability | All baselines (XGBoost+RDKit/POM/MOLT5, CheMeleon, MolSets, POM+CheMix, POMMix) are evaluated on **the exact same fold splits** used for MixScentNet. |
 
-All hyperparameters, optimizer settings, and loss weighting schemes follow Appendix and are encoded as defaults in the three entry-point scripts; no per-experiment manual tuning is required to reproduce the reported numbers.
+All hyperparameters, optimizer settings, and loss weighting schemes follow the Appendix and are encoded as defaults in the three entry-point scripts; no per-experiment manual tuning is required to reproduce the reported numbers.
 
 ---
 
