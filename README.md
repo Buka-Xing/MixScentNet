@@ -11,7 +11,7 @@ This repository accompanies an **anonymous** submission to NeurIPS 2026 and is s
 
 - All author names, institutional identifiers, acknowledgements, and personal URLs have been removed from the codebase.
 - The repository is provided **strictly for reviewer inspection of the methodology and reported results** and must not be redistributed.
-- The pretrained model weights, processed pre-training datasets, and a permissive open-source license will be released **upon acceptance**.
+- The **pretrained model weights, processed pre-training datasets**, and a permissive open-source license will be released **upon acceptance**.
 
 If reviewers identify any residual de-anonymizing content, we kindly ask them to flag it in their reviews so that we can remedy it promptly.
 
@@ -24,7 +24,7 @@ MixScentNet/
 ├── MixScentNet_Label.py              # Entry point: DREAM2025 label prediction
 ├── MixScentNet_Similarity.py         # Entry point: DREAM2024 perceptual similarity
 ├── MixScentNet_OW_train&test.py      # Entry point: Olfactory White reproduction
-├── DMPNN_pretrained.pt               # The pretrained weight for the DMPNN (**Release upon acceptance**)
+├── DMPNN_pretrained.pt               # The pretrained weight for the DMPNN (Release upon acceptance)
 │
 ├── backbones/                        # Model implementations and dataset loader
 │   ├── DMPNN.py                      # DMPNN Instantiation
@@ -34,7 +34,7 @@ MixScentNet/
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
 │   └── DREAM2024/                    # Mixture pairs + perceptual distances
-│   └── PubChem/                      # The Curated PubChem dataset for pre-training (**Release upon acceptance**)
+│   └── PubChem/                      # The Curated PubChem dataset for pre-training (Release upon acceptance)
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
     ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
