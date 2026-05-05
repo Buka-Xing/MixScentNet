@@ -80,7 +80,7 @@ The codebase has been tested under the following environment:
 
 ```bash
 # 1. Create a fresh conda environment
-conda create -n mixscentnet python=3.10 -y
+conda create -n mixscentnet python=3.11.2 -y
 conda activate mixscentnet
 
 # 2. Install PyTorch with CUDA 11.8
