@@ -1,9 +1,0 @@
-=== 5-Fold Cross Validation Results ===
-Fold 1 - Pearson: 0.5543, Cosine Similarity: 0.2669
-Fold 2 - Pearson: 0.4136, Cosine Similarity: 0.3411
-Fold 3 - Pearson: 0.5789, Cosine Similarity: 0.2616
-Fold 4 - Pearson: 0.5457, Cosine Similarity: 0.2625
-Fold 5 - Pearson: 0.5838, Cosine Similarity: 0.2524
-------------------------------
-Average Pearson: 0.5353
-Average Cosine Distance: 0.2769
