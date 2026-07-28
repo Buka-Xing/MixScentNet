@@ -4,9 +4,9 @@
 > **Submission:** NeurIPS 2026 — Main Track (under double-blind review)
 
 ---
-Updatas:
+## 🔈 Updatas:
 
-28/Jul./2026 Uploading the MixScentNet results on the DREAM2024 and DREAM2025 leaderboard in './Leaderboard_results'. There are also top teams reimplementation results in './Leaderboard_results/DREAM2024_leaderboard' to highlight the data leakage issue occur in DREAM2024. 
+28/Jul./2026: Uploading the MixScentNet results on the DREAM2024 and DREAM2025 leaderboard in './Leaderboard_results'. There are also top teams reimplementation results in './Leaderboard_results/DREAM2024_leaderboard' to highlight the data leakage issue occur in DREAM2024. 
 
 Quick link checking the official results:
 - DREAM2024 official Leaderboard: [link](https://www.synapse.org/Synapse:syn57373396/tables/)
