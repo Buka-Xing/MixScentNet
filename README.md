@@ -173,11 +173,20 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 ## ✨ Acknowledge
 
 Our self-supervised pretraining is largely inspired by JacksonBurn, thanks a lot for their outstanding works.
-[GitHub](https://github.com/JacksonBurns/chemeleon)
-[Paper](https://arxiv.org/abs/2506.15792)
+
+[GitHub](https://github.com/JacksonBurns/chemeleon); [Paper](https://arxiv.org/abs/2506.15792)
 
 ---
 
-## 📜 License
+## 📜 License & Citation
 
-Code and data in this anonymous repository are made available **for the sole purpose of NeurIPS 2026 peer review**. A formal open-source license (CC BY 4.0 for data, MIT for code) will be applied upon de-anonymization at the camera-ready stage.
+The code reporsority adopts CC BY 4.0 for data, MIT for code. If you find this work useful, please cite:
+
+```bibtex
+@inproceedings{MixScentNet,
+  title     = {MixScentNet: A Multiscale Graph-based Framework for Predicting Scent Mixture Perception},
+  author    = {Xingran Liao, Mingliang Zhou, Weisi Lin.},
+  booktitle = {The Fortieth Annual Conference on Neural Information Processing Systems 2026 (NeurIPS)},
+  year      = {2026}
+}
+```
