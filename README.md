@@ -11,8 +11,10 @@ The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
 ---
 ## 🔈 Updates:
 
-2/Oct./2026: Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance); 'DREAM2025_official_Label_Leaderboard.py' (MixScentNet's DREAM2025 official leaderboard set performance); 
-'DMPNN_pretrained.pt' (Pretrained weights of the single-molecular encoder)
+2/Oct./2026: 
+- Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance);
+- 'DREAM2025_official_Label_Leaderboard.py' (MixScentNet's DREAM2025 official leaderboard set performance); 
+- ['DMPNN_pretrained.pt'](https://drive.google.com/file/d/1tAoxYES-HgdL2Z0qihCcbLL6HJ5_AmZH/view?usp=drive_link)
 
 Quick link checking the official results:
 - DREAM2024 official test set: https://www.synapse.org/Synapse:syn62786069/tables/
