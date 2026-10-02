@@ -170,13 +170,6 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 | Figure 2 + Appendix A.2 (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
 
 ---
-## ✨ Acknowledge
-
-Our self-supervised pretraining is largely inspired by JacksonBurn, thanks a lot for their outstanding works.
-
-[GitHub](https://github.com/JacksonBurns/chemeleon); [Paper](https://arxiv.org/abs/2506.15792)
-
----
 
 ## 📜 License & Citation
 
