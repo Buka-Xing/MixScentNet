@@ -1,17 +1,26 @@
-# MixScentNet — Anonymous Code Repository
+# MixScentNet: A Multiscale Graph-based Framework for Predicting Scent Mixture Perception
 
-> **Paper:** *MixScentNet: A Graph-Based Framework with Self-Supervised Pretraining for Olfactory Perception Prediction of Molecular Mixtures*
-> **Submission:** NeurIPS 2026 — Main Track (under double-blind review)
+The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
+
+> **NeurIPS2026** | [Paper]() | [Poster & Video]()
+
+<p align="center">
+  <img src="MixScentNet_overview.png" width="85%" alt="MixScentNet Framework">
+</p>
 
 ---
 ## 🔈 Updates:
 
+2/Oct./2026: Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance); 'DREAM2025_official_Label_Leaderboard.py' (MixScentNet's DREAM2025 official leaderboard set performance); 
+'DMPNN_pretrained.pt' (Pretrained weights of the single-molecular encoder)
+
 28/Jul./2026: Uploading the MixScentNet results on the DREAM2024 and DREAM2025 leaderboard in './Leaderboard_results'. There are also top teams reimplementation results in './Leaderboard_results/DREAM2024_leaderboard' to highlight the data leakage issue occur in DREAM2024. 
 
 Quick link checking the official results:
-- DREAM2024 official Leaderboard: https://www.synapse.org/Synapse:syn57373396/tables/
 - DREAM2024 official test set: https://www.synapse.org/Synapse:syn62786069/tables/
 - DREAM2025 official Leaderboard: https://www.synapse.org/Synapse:syn66484079/tables/
+
+**NOTE**: the DREAM2025 doesn't release the official test set (2/Oct./2026), and there is a **data leakage** issue on the DREAM2024 Leaderboard, so we don't report results on DREAM2024 Leaderboard set.
 
 ---
 
