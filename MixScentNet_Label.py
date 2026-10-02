@@ -11,7 +11,7 @@ import torchmetrics.functional as F1
 import torch.nn.functional as F2
 import tqdm
 
-# Import related modules
+# 导入相关模块
 from backbones.DMPNN import DMPNN_Fingerprint
 from backbones.dataloader import *
 from backbones.model_gat import MixtureEncoder
@@ -22,11 +22,11 @@ sys.path.append(str(base_dir / "src/"))
 
 def create_bow_and_indices(features_list, max_len=43):
     """
-    Inputs:
-        features_list: list of SMILES for each mixture's components, e.g. [['C', 'O'],['CC', 'CCC']]
-    Outputs:
-        unique_smiles: Bag-of-Words consisting of all unique SMILES in the set
-        indices: Tensor of shape (Batch, max_len); -1 indicates an absent component
+    输入:
+        features_list: 包含每个混合物组分 SMILES 的列表。例如 [['C', 'O'],['CC', 'CCC']]
+    输出:
+        unique_smiles: 该集合中所有独立的 SMILES 组成的 Bag-of-Words
+        indices: 形状为 (Batch, max_len) 的 Tensor，-1 表示没有该组分
     """
     unique_smiles = list(set([smi for mix in features_list for smi in mix]))
     smi2idx = {smi: i for i, smi in enumerate(unique_smiles)}
@@ -34,7 +34,7 @@ def create_bow_and_indices(features_list, max_len=43):
     indices = []
     for mix in features_list:
         idx_list = [smi2idx[smi] for smi in mix]
-        # Pad / truncate to max_len; pad value is -1
+        # 统一长度至 max_len，不足补 -1
         if len(idx_list) < max_len:
             idx_list.extend([-1] * (max_len - len(idx_list)))
         else:
@@ -45,33 +45,33 @@ def create_bow_and_indices(features_list, max_len=43):
 
 def get_dmpnn_mixture_features(bow_smiles, indices, dmpnn_model, device, unk_token=-999):
     """
-    Inputs:
-        bow_smiles: pool of unique molecules (list of str)
-        indices: index-mapping Tensor of shape (Batch, 43)
-        dmpnn_model: pre-initialized DMPNN_Fingerprint feature extractor
-    Outputs:
-        mixture_tensor: mixture features of shape (Batch, 43, embed_dim, 1)
+    输入:
+        bow_smiles: 独立的分子池 (list of str)
+        indices: 映射索引 Tensor (Batch, 43)
+        dmpnn_model: 预初始化的 DMPNN_Fingerprint 特征提取器
+    输出:
+        mixture_tensor: 形状为 (Batch, 43, embed_dim, 1) 的混合物特征
     """
-    # 1. Extract DMPNN features for the unique molecules (process all of them in a single pass)
+    # 1. 提取独立分子的 DMPNN 特征 (一次性处理所有独特分子)
     unique_feats = dmpnn_model(bow_smiles)
     unique_feats = torch.tensor(unique_feats, dtype=torch.float32, device=device)
 
     embed_dim = unique_feats.shape[-1]
 
-    # 2. Build a placeholder feature row for the -1 (padding) positions, filled with unk_token (-999)
+    # 2. 生成对应 -1 (padding) 的特征占位符，值为 unk_token(-999)
     pad_vec = torch.full((1, embed_dim), unk_token, dtype=torch.float32, device=device)
     all_feats = torch.cat([unique_feats, pad_vec], dim=0)
 
-    # 3. Remap the original -1 positions to the index of the padding row appended above
+    # 3. 将原先为 -1 的位置，映射到刚才拼接到最后的 pad_vec 索引上
     pad_idx = len(unique_feats)
     mapped_indices = indices.clone().to(device)
     mapped_indices[mapped_indices == -1] = pad_idx
 
-    # 4. Gather by index to quickly reshape into (Batch, 43, embed_dim)
+    # 4. 根据 index 进行 Gather，快速重构为 (Batch, 43, embed_dim)
     mixture_tensor = all_feats[mapped_indices]
 
-    # 5. Add a trailing dimension to obtain (Batch, 43, embed_dim, 1),
-    #    matching the torch.unbind(x, dim=-1) logic in MixtureEncoder.forward
+    # 5. 增加最后一个维度，变成 (Batch, 43, embed_dim, 1)
+    #    以兼容 MixtureEncoder.forward 中 torch.unbind(x, dim=-1) 的逻辑
     mixture_tensor = mixture_tensor.unsqueeze(-1)
 
     return mixture_tensor
@@ -79,10 +79,9 @@ def get_dmpnn_mixture_features(bow_smiles, indices, dmpnn_model, device, unk_tok
 class HuberLoss(nn.Module):
     def __init__(self, delta: float = 0.4):
         """
-        delta=0.4 is friendly to low-std labels:
-        most errors are < 0.4 (since the labels themselves span a narrow range)
-        and stay in the quadratic regime; extreme outliers fall into the
-        linear regime and do not dominate the gradient.
+        delta=0.4 对低std标签友好：
+        绝大多数误差 < 0.4（因为标签本身范围就窄），走二次区间
+        极端离群值进入线性区间，不会主导梯度
         """
         super().__init__()
         self.delta = delta
@@ -90,10 +89,10 @@ class HuberLoss(nn.Module):
     def forward(self, pred: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
         """
         Args:
-            pred:   (B, N) model predictions
-            target: (B, N) ground-truth labels
+            pred:   (B, N) 模型预测值
+            target: (B, N) 真实标签
         Returns:
-            loss: scalar
+            loss: 标量
         """
         err = pred - target
         loss = torch.where(
@@ -111,12 +110,12 @@ class MeanPLCCLoss(nn.Module):
     def forward(self, pred: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
         """
         Args:
-            pred:   (B, N) model predictions
-            target: (B, N) ground-truth labels
+            pred:   (B, N) 模型预测值
+            target: (B, N) 真实标签
         Returns:
-            loss: (1 - PLCC) averaged over B, range [0, 2]
+            loss: 在 B 上平均的 (1 - PLCC)，范围 [0, 2]
         """
-        # Subtract the mean along the N dimension; keep dim for broadcasting: (B, 1)
+        # 沿 N 维度去均值，保持维度用于广播: (B, 1)
         pred_mean   = pred.mean(dim=1, keepdim=True)
         target_mean = target.mean(dim=1, keepdim=True)
 
@@ -130,10 +129,10 @@ class MeanPLCCLoss(nn.Module):
             (target_centered ** 2).sum(dim=1)
         ) + self.eps  # (B,)
 
-        plcc_per_sample = numerator / denominator   # (B,), one PLCC value per sample
+        plcc_per_sample = numerator / denominator   # (B,)，每个样本一个 PLCC 值
         loss_per_sample = 1.0 - plcc_per_sample     # (B,)
 
-        return loss_per_sample.mean()               # scalar
+        return loss_per_sample.mean()               # 标量
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -143,17 +142,17 @@ if __name__ == "__main__":
     parser.add_argument("--dmpnn-lr", default=1e-4, type=float)
     FLAGS = parser.parse_args()
 
-    SEED = 202644  #202644
+    SEED = 202644  # 202644
     EARLY_STOP_PATIENCE = 2000
     EARLY_STOP_DELTA = 0.001
     num_epochs = 5000
     scheduler_step_size = 1500
 
-    MOL_DIM = 512     # D-MPNN output dimension
-    HIDDEN_DIM = 512  # GATv2 hidden dimension
+    MOL_DIM = 512     # D-MPNN 输出维度
+    HIDDEN_DIM = 512  # GATv2 隐层维度
 
-    DMPNN_freeze = True
-    FLAGS.exp_name = 'DMPNNfix_MixtureGATtrain_SEED%s_%s' % (SEED, FLAGS.loss)
+    DMPNN_freeze = False
+    FLAGS.exp_name = 'DMPNNTrain_MixtureGATtrain_SEED%s_%s' % (SEED, FLAGS.loss)
     labels_file = "./datasets/DREAM2025/TASK2_final_mixture_dataset.csv"
     smiles_file = "./datasets/DREAM2025/Mixture_SMILES_Converted.csv"
     fname = Path(f"results/{FLAGS.split}/label/{FLAGS.exp_name}")
@@ -161,11 +160,11 @@ if __name__ == "__main__":
     weights_dir = fname / "weights"
     os.makedirs(weights_dir, exist_ok=True)
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
     print(f"Running on: {device}")
 
     # ===============================
-    # Data splitting and main training loop
+    # 数据划分与训练主循环
     # ===============================
     if FLAGS.split == 'random_cv':
         cv_splits = get_mixture_cv_splits(labels_file, smiles_file, SEED)  # for normal split experiment
@@ -190,7 +189,7 @@ if __name__ == "__main__":
             for name, param in DMPNN.model.named_parameters():
                 param.requires_grad = False
 
-        # Reset the random seed for every fold to keep initialization consistent
+        # 每个 fold 重置随机种子，保证初始化一致
         torch.manual_seed(SEED)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(SEED)
@@ -207,7 +206,7 @@ if __name__ == "__main__":
         print(f"Training set size: {len(train_labels)}")
         print(f"Testing set size: {len(test_labels)}")
 
-        # Use MixtureEncoder in place of Chemix; input (Batch, 43, 512, 1), output (Batch, 51)
+        # 用 MixtureEncoder 替代 Chemix，输入 (Batch, 43, 512, 1)，输出 (Batch, 51)
         mixture_encoder = MixtureEncoder(
             mol_dim=MOL_DIM,
             hidden_dim=HIDDEN_DIM,

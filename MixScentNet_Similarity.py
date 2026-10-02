@@ -43,7 +43,7 @@ def create_bow_and_indices(features_list, max_len=43):
 
 def get_dmpnn_mixture_features(bow_smiles, indices, dmpnn_model, device, unk_token=-999):
     """
-    Output: (batch, 43, embed_dim, 2) — directly compatible with MixtureEncoder.forward(x)
+    输出: (batch, 43, embed_dim, 2) — 直接适配 MixtureEncoder.forward(x)
     """
     unique_feats = dmpnn_model(bow_smiles)          # (n_unique, embed_dim)
     embed_dim = unique_feats.shape[-1]
@@ -67,10 +67,10 @@ class PLCCLoss(nn.Module):
     def forward(self, pred: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
         """
         Args:
-            pred:   (N,) or (N, 1) model predictions
-            target: (N,) or (N, 1) ground-truth labels
+            pred:   (N,) 或 (N, 1) 模型预测值
+            target: (N,) 或 (N, 1) 真实标签
         Returns:
-            loss: 1 - PLCC, range [0, 2]; smaller is better
+            loss: 1 - PLCC，范围 [0, 2]，越小越好
         """
         pred   = pred.view(-1)
         target = target.view(-1)
@@ -86,8 +86,8 @@ class PLCCLoss(nn.Module):
             (pred_centered ** 2).sum() * (target_centered ** 2).sum()
         ) + self.eps
 
-        plcc = numerator / denominator          # range [-1, 1]
-        return 1.0 - plcc                       # range [0, 2], optimal value is 0
+        plcc = numerator / denominator          # 范围 [-1, 1]
+        return 1.0 - plcc                       # 范围 [0, 2]，最优值为 0
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -99,24 +99,24 @@ if __name__ == "__main__":
                         help="Learning rate for DMPNN backbone")
     FLAGS = parser.parse_args()
 
-    SEED = 202644
+    SEED = 202644  # 202644
     EARLY_STOP_PATIENCE = 1000
     num_epochs = 5000
     scheduler_step_size = 1500
 
-    MOL_DIM = 512     # DMPNN output dimension
-    HIDDEN_DIM = 512  # GNN hidden dimension
+    MOL_DIM = 512     # DMPNN 输出维度
+    HIDDEN_DIM = 512  # GNN 隐层维度
 
     dmpnn_freeze = True
-    FLAGS.exp_name = 'DMPNNfix_MixtureGATtrain_SEED%s_%s' % (SEED, FLAGS.loss)
-    labels_file = "./datasets/DREAM2024/mixtures_combined.csv"
-    smiles_file  = "./datasets/DREAM2024/mixture_smi_definitions_clean.csv"
+    FLAGS.exp_name = 'DMPNNFix_MixtureGATtrain_SEED%s_%s' % (SEED, FLAGS.loss)
+    labels_file = "./datasets/mixtures/mixtures_combined.csv"
+    smiles_file  = "./datasets/mixtures/mixture_smi_definitions_clean.csv"
     fname = Path(f"results/{FLAGS.split}/similarity/{FLAGS.exp_name}")
     os.makedirs(f"{fname}/", exist_ok=True)
     weights_dir = fname / "weights"
     os.makedirs(weights_dir, exist_ok=True)
 
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
     print(f"Running on: {device}")
 
     if FLAGS.split == 'random_cv':
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
     for id, train, test in cv_splits:
         # ================================================================
-        # 1. Initialize the DMPNN feature extractor and MixtureEncoder
+        # 1. 初始化 DMPNN 特征提取器 和 MixtureEncoder
         # ================================================================
         print("Loading DMPNN Fingerprint Model...")
         DMPNN = DMPNN_Fingerprint(MOL_DIM, device=device)
@@ -150,13 +150,13 @@ if __name__ == "__main__":
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(SEED)
 
-        # MixtureEncoder: takes (batch, 43, 512, 2) and outputs (batch,) similarity scores
+        # MixtureEncoder: 接收 (batch, 43, 512, 2)，输出 (batch,) 相似度分数
         mixture_encoder = MixtureEncoder(
             mol_dim=MOL_DIM, hidden_dim=HIDDEN_DIM, output_type='similarity'
         ).to(device)
 
         # ================================================================
-        # 2. Data preparation (BOW indices; features are not pre-extracted, DMPNN is run each epoch)
+        # 2. 数据准备（BOW 索引，不预提取特征，每 epoch 动态过 DMPNN）
         # ================================================================
         train_features, train_labels = train
         train_bow, train_indices = create_bow_and_indices(train_features, max_len=43)
@@ -171,7 +171,7 @@ if __name__ == "__main__":
         print(f"Testing set size:  {len(test_labels)}")
 
         # ================================================================
-        # 3. Optimizer & scheduler
+        # 3. 优化器 & 调度器
         # ================================================================
         if   FLAGS.loss == "MAELoss":
             loss_fn = nn.L1Loss()
@@ -194,7 +194,7 @@ if __name__ == "__main__":
         )
 
         # ================================================================
-        # 4. Training loop
+        # 4. 训练循环
         # ================================================================
         log = {k: [] for k in ["epoch", "train_loss", "test_loss", "test_metric"]}
         pbar = tqdm.tqdm(range(num_epochs))
@@ -285,7 +285,7 @@ if __name__ == "__main__":
         torch.cuda.empty_cache()
 
     # ================================================================
-    # 5. Summary
+    # 5. 汇总
     # ================================================================
     plcc_arr = np.array(plcc_list, dtype=np.float64)
     krcc_arr = np.array(krcc_list, dtype=np.float64)
