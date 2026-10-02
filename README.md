@@ -14,25 +14,11 @@ The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
 2/Oct./2026: Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance); 'DREAM2025_official_Label_Leaderboard.py' (MixScentNet's DREAM2025 official leaderboard set performance); 
 'DMPNN_pretrained.pt' (Pretrained weights of the single-molecular encoder)
 
-28/Jul./2026: Uploading the MixScentNet results on the DREAM2024 and DREAM2025 leaderboard in './Leaderboard_results'. There are also top teams reimplementation results in './Leaderboard_results/DREAM2024_leaderboard' to highlight the data leakage issue occur in DREAM2024. 
-
 Quick link checking the official results:
 - DREAM2024 official test set: https://www.synapse.org/Synapse:syn62786069/tables/
 - DREAM2025 official Leaderboard: https://www.synapse.org/Synapse:syn66484079/tables/
 
 **NOTE**: the DREAM2025 doesn't release the official test set (2/Oct./2026), and there is a **data leakage** issue on the DREAM2024 Leaderboard, so we don't report results on DREAM2024 Leaderboard set.
-
----
-
-## ⚠️ Anonymous Submission Notice
-
-This repository accompanies an **anonymous** submission to NeurIPS 2026 and is shared via an anonymous link **for review purposes only**. Any redistribution, training of derivative models, or use beyond verification of the reported results is **not authorized** at this stage. In compliance with the double-blind reviewing policy:
-
-- All author names, institutional identifiers, acknowledgements, and personal URLs have been removed from the codebase.
-- The repository is provided **strictly for reviewer checking our methodology and reported results** and must not be redistributed.
-- The **pretrained model weights**, **processed pre-training datasets**, and **a permissive open-source license** will be released **upon acceptance**.
-
-If reviewers identify any residual de-anonymizing content, we kindly ask them to flag it in their reviews so that we can remedy it promptly.
 
 ---
 
@@ -43,7 +29,7 @@ MixScentNet/
 ├── MixScentNet_Label.py              # Entry point: DREAM2025 label prediction
 ├── MixScentNet_Similarity.py         # Entry point: DREAM2024 perceptual similarity
 ├── MixScentNet_OW_train&test.py      # Entry point: Olfactory White reproduction
-├── DMPNN_pretrained.pt               # The pretrained weight for the DMPNN (Release upon acceptance)
+├── DMPNN_pretrained.pt               # The pretrained weight for the DMPNN 
 │
 ├── backbones/                        # Model implementations and dataset loader
 │   ├── DMPNN.py                      # DMPNN Instantiation
@@ -53,7 +39,6 @@ MixScentNet/
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
 │   └── DREAM2024/                    # Mixture pairs + perceptual distances
-│   └── PubChem/                      # The Curated PubChem dataset for pre-training (Release upon acceptance)
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
     ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
@@ -149,6 +134,18 @@ This script:
 - For every test mixture pair, record the geometric mean √(n₁·n₂) and the predicted perceptual distance.
 - Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
 
+### 4. Official test and leaderboard results (DREAM 2024&2025)
+
+```bash
+python "DREAM2024_official_Similarity_valid-test.py"
+python "DREAM2025_official_Label_Leaderboard.py"
+```
+
+These scripts:
+- Run MixScentNet on DREAM 2024&2025 official training/leaderboard/test splits.
+- For DREAM 2024: the best checkpoint is picked on leaderboard validation metrics. We pick small epoches as the test set is very small to avoid overfitting
+- For DREAM 2025: the best checkpoint is picked on leaderboard validation metrics. 
+
 ---
 
 ## 🔁 Reproducibility
@@ -171,6 +168,13 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 | Table 1 (standard 5-fold CV) | `MixScentNet_Label.py --split random_cv`, `MixScentNet_Similarity.py --split random_cv` + logs in `results-manuscript/EXP1/` |
 | Table 2 (unseen-molecule CV) | Same scripts with the `--split random_cv_unseen` flag + logs in `results-manuscript/EXP2/` |
 | Figure 2 + Appendix A.2 (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
+
+---
+## ✨ Acknowledge
+
+Our self-supervised pretraining is largely inspired by JacksonBurn, thanks a lot for their outstanding works.
+[GitHub](https://github.com/JacksonBurns/chemeleon)
+[Paper](https://arxiv.org/abs/2506.15792)
 
 ---
 
