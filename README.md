@@ -2,7 +2,7 @@
 
 The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
 
-> **NeurIPS2026** | [Paper]() | [Poster & Video]()
+> **NeurIPS2026** | [Paper]() | [Poster & Video](https://drive.google.com/file/d/1fgVKkBBWs4qk2Qm_sAY4BFHQ9C4MXCdz/view?usp=drive_link)
 
 <p align="center">
   <img src="MixScentNet_overview.png" width="85%" alt="MixScentNet Framework">
