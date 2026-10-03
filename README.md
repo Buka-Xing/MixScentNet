@@ -40,7 +40,7 @@ MixScentNet/
 │
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
-│   ├── DREAM2024/                    # Mixture pairs + perceptual distances
+│   └── DREAM2024/                    # Mixture pairs + perceptual distances
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
     ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
