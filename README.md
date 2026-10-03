@@ -31,7 +31,7 @@ MixScentNet/
 ├── MixScentNet_Label.py              # Entry point: DREAM2025 label prediction
 ├── MixScentNet_Similarity.py         # Entry point: DREAM2024 perceptual similarity
 ├── MixScentNet_OW_train&test.py      # Entry point: Olfactory White reproduction
-├── DMPNN_PubChem_20260315.pt               # The pretrained weight for the DMPNN 
+├── DMPNN_PubChem_20260315.pt         # The pretrained weight for the DMPNN 
 │
 ├── backbones/                        # Model implementations and dataset loader
 │   ├── DMPNN.py                      # DMPNN Instantiation
@@ -40,7 +40,7 @@ MixScentNet/
 │
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
-│   └── DREAM2024/                    # Mixture pairs + perceptual distances
+│   ├── DREAM2024/                    # Mixture pairs + perceptual distances
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
     ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
