@@ -14,7 +14,7 @@ The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
 2/Oct./2026: 
 - Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance);
 - 'DREAM2025_official_Label_Leaderboard.py' (MixScentNet's DREAM2025 official leaderboard set performance); 
-- ['DMPNN_pretrained.pt'](https://drive.google.com/file/d/1fgVKkBBWs4qk2Qm_sAY4BFHQ9C4MXCdz/view?usp=drive_link)
+- ['DMPNN_PubChem_20260315.pt'](https://drive.google.com/file/d/1fgVKkBBWs4qk2Qm_sAY4BFHQ9C4MXCdz/view?usp=drive_link)
 
 Quick link checking the official results:
 - DREAM2024 official test set: https://www.synapse.org/Synapse:syn62786069/tables/
@@ -31,7 +31,7 @@ MixScentNet/
 ├── MixScentNet_Label.py              # Entry point: DREAM2025 label prediction
 ├── MixScentNet_Similarity.py         # Entry point: DREAM2024 perceptual similarity
 ├── MixScentNet_OW_train&test.py      # Entry point: Olfactory White reproduction
-├── DMPNN_pretrained.pt               # The pretrained weight for the DMPNN 
+├── DMPNN_PubChem_20260315.pt               # The pretrained weight for the DMPNN 
 │
 ├── backbones/                        # Model implementations and dataset loader
 │   ├── DMPNN.py                      # DMPNN Instantiation
