@@ -134,20 +134,8 @@ This script:
 - Reports PLCC (↑) and KRCC (↑) per fold and aggregated mean ± deviation.
 - '--split' can be chosen as {'random_cv', 'random_cv_unseen'} for reproducing results in TABLE 1&2
 - '--loss' can be chosen as {'MAELoss','MSELoss','PLCCLoss'}
- 
-### 3. Olfactory White Reproduction (Section 4.4 + Appendix A.2)
 
-```bash
-python "MixScentNet_OW_train&test.py" --train-sources Snitz+Ravia
-```
-
-This script:
-- Implements the **leave-one-subset-out** protocol on DREAM2024.
-- Trains MixScentNet on two of {Snitz, Ravia, Bushdid} and evaluates on the held-out subset.
-- For every test mixture pair, record the geometric mean √(n₁·n₂) and the predicted perceptual distance.
-- Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
-
-### 4. Official test and leaderboard results (DREAM 2024&2025)
+### 3. Official test and leaderboard results (Table 3)
 
 ```bash
 python "DREAM2024_official_Similarity_valid-test.py"
@@ -158,6 +146,18 @@ These scripts:
 - Run MixScentNet on DREAM 2024&2025 official training/leaderboard/test splits.
 - For DREAM 2024: the best checkpoint is picked on leaderboard validation metrics. We pick small epoches as the test set is very small to avoid overfitting
 - For DREAM 2025: the best checkpoint is picked on leaderboard validation metrics. 
+ 
+### 4. Olfactory White Reproduction (Section 4.5 + Appendix A.2)
+
+```bash
+python "MixScentNet_OW_train&test.py" --train-sources Snitz+Ravia
+```
+
+This script:
+- Implements the **leave-one-subset-out** protocol on DREAM2024.
+- Trains MixScentNet on two of {Snitz, Ravia, Bushdid} and evaluates on the held-out subset.
+- For every test mixture pair, record the geometric mean √(n₁·n₂) and the predicted perceptual distance.
+- Computes Pearson r, Spearman ρ, and OLS regression statistics, and exports scatter data used to render the figures in the paper.
 
 ---
 
@@ -180,6 +180,7 @@ All hyperparameters, optimizer settings, and loss weighting schemes follow the A
 | --- | --- |
 | Table 1 (standard 5-fold CV) | `MixScentNet_Label.py --split random_cv`, `MixScentNet_Similarity.py --split random_cv` + logs in `results-manuscript/EXP1/` |
 | Table 2 (unseen-molecule CV) | Same scripts with the `--split random_cv_unseen` flag + logs in `results-manuscript/EXP2/` |
+| Table 3 (DREAM2024&2025) | DREAM2024_official_Similarity_valid-test.py, DREAM2025_official_Label_Leaderboard.py |
 | Figure 2 + Appendix A.2 (olfactory white) | `MixScentNet_OW_train&test.py` + logs in `results-manuscript/olfactory_white/` |
 
 ---
