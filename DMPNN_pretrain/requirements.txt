@@ -1,0 +1,25 @@
+# DMPNN_pretrain dependencies
+# Tested on torch2.4_py311 (Python 3.11, PyTorch 2.4.x)
+
+# ── Deep learning ────────────────────────────────────────────────
+torch>=2.4.0
+lightning>=2.0.0
+
+# ── Molecular ML ─────────────────────────────────────────────────
+# chemprop v2.x API (chemprop.featurizers, chemprop.data.Datum, etc.)
+chemprop>=2.0.0
+# fastprop provides standard_scale used in pretrain_mordred.py
+fastprop>=1.0.0
+
+# ── Descriptor computation ───────────────────────────────────────
+# mordred-community is the maintained fork compatible with Python 3.11
+mordred-community>=1.2.1
+rdkit>=2023.3.0
+
+# ── Data storage ─────────────────────────────────────────────────
+# zarr 3.x API: zarr.create_array with compressors= (plural) kwarg
+zarr>=3.0.0
+numpy>=1.24.0
+
+# ── Utilities ────────────────────────────────────────────────────
+tqdm>=4.64.0
