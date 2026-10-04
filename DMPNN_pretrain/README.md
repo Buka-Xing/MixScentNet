@@ -6,7 +6,7 @@ chemistry-aware initialization before being fine-tuned on olfactory tasks.
 
 ---
 
-🗺️ ## Directory structure
+## 🗺️  Directory structure
 
 ```
 DMPNN_pretrain/
@@ -21,7 +21,7 @@ DMPNN_pretrain/
 
 ---
 
-🕹️ ## Pipeline overview
+## 🕹️ Pipeline overview
 
 ```
 raw pubchem.smiles (7.1GB raw file, from https://zenodo.org/records/15733575)
@@ -38,7 +38,7 @@ output/best.pt           (pre-trained D-MPNN weights)
 
 ---
 
-⚙️ ## File descriptions
+## ⚙️ File descriptions
 
 ### `filter_pubchem_olfactory.py`
 
@@ -131,7 +131,7 @@ NaN values (arising from missing or invariant Mordred dimensions) are handled by
 
 ---
 
-🖥️ ## Running the full pipeline
+## 🖥️ Running the full pipeline
 
 ```bash
 # 0. Obtain raw PubChem SMILES (e.g. from ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/)
@@ -152,7 +152,7 @@ Step 3 uses PyTorch Lightning and automatically uses available GPUs.
 
 ---
 
-## Requirements
+## 🤖 Requirements
 
 See `requirements.txt`.  Install into the `torch2.4_py311` conda environment:
 
