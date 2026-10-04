@@ -1,6 +1,6 @@
 # MixScentNet: A Multiscale Graph-based Framework for Predicting Scent Mixture Perception
 
-The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
+The official code reporsority for MixScentNet, accepted by NeurIPS 2026. The MixScentNet models molecule mixtures as complete graphs, combining self-supervised pretraining on Mordred descriptors with a 3-layer residual GATv2, achieving competitive performance on olfactory label and perceptual distance prediction and reproducing olfactory white.
 
 > **NeurIPS2026** | [Paper]() | [Poster & Video]()
 
@@ -10,6 +10,8 @@ The official code reporsority for MixScentNet, accepted by NeurIPS 2026.
 
 ---
 ## 🔈 Updates:
+4/Oct./2026:
+- Uploading the pretraining codes for DMPNN (DMPNN_pretrain folder)
 
 2/Oct./2026: 
 - Uploading the 'DREAM2024_official_Similarity_valid-test.py' (MixScentNet's DREAM2024 official test set performance);
@@ -41,6 +43,15 @@ MixScentNet/
 ├── datasets/                         # Curated experimental data
 │   ├── DREAM2025/                    # Mixtures + 51-d perceptual labels
 │   └── DREAM2024/                    # Mixture pairs + perceptual distances
+│
+├── DMPNN_pretrain/
+│   ├── output/                             # Pretraining checkpoints folder
+│   ├── training_store/                     # Mordred descriptor folder (zarr)
+│   ├── filter_pubchem_olfactory.py         # filter rules for raw PubChem SMILE.
+│   ├── pubchem_olfactory_1million.smiles   # ~1.17 M curated SMILES
+│   ├── features_mordred.py                 # compute Mordred descriptors → zarr
+│   ├── pretrain_mordred.py                 # pre-train D-MPNN via masked descriptor prediction
+│   └── torchford.py                        # Welford online mean/variance accumulator
 │
 └── results-manuscript/               # Training logs & results in the mainuscript
     ├── EXP1/                         # 5-fold logs + per-fold metrics for TABLE 1
