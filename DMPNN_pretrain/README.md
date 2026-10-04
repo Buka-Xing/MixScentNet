@@ -6,23 +6,25 @@ chemistry-aware initialization before being fine-tuned on olfactory tasks.
 
 ---
 
-## Directory structure
+🗺️ ## Directory structure
 
 ```
 DMPNN_pretrain/
-├── filter_pubchem_olfactory.py      # Step 1 – filter raw PubChem SMILES
-├── pubchem_olfactory_1million.smiles # Step 1 output – ~1.17 M cleaned SMILES
-├── features_mordred.py              # Step 2 – compute Mordred descriptors → zarr
-├── pretrain_mordred.py              # Step 3 – pre-train D-MPNN via masked descriptor prediction
-└── torchford.py                     # Helper – Welford online mean/variance accumulator
+├── output/                             # Pretraining checkpoints folder
+├── training_store/                     # Mordred descriptor folder (zarr)
+├── filter_pubchem_olfactory.py         # filter rules for raw PubChem SMILE.
+├── pubchem_olfactory_1million.smiles   # ~1.17 M curated SMILES
+├── features_mordred.py                 # compute Mordred descriptors → zarr
+├── pretrain_mordred.py                 # pre-train D-MPNN via masked descriptor prediction
+└── torchford.py                        # Welford online mean/variance accumulator
 ```
 
 ---
 
-## Pipeline overview
+🕹️ ## Pipeline overview
 
 ```
-raw pubchem.smiles
+raw pubchem.smiles (7.1GB raw file, from https://zenodo.org/records/15733575)
         │
         ▼  filter_pubchem_olfactory.py
 pubchem_olfactory_1million.smiles
@@ -36,7 +38,7 @@ output/best.pt           (pre-trained D-MPNN weights)
 
 ---
 
-## File descriptions
+⚙️ ## File descriptions
 
 ### `filter_pubchem_olfactory.py`
 
@@ -129,7 +131,7 @@ NaN values (arising from missing or invariant Mordred dimensions) are handled by
 
 ---
 
-## Running the full pipeline
+🖥️ ## Running the full pipeline
 
 ```bash
 # 0. Obtain raw PubChem SMILES (e.g. from ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/)
