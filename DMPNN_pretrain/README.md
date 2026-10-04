@@ -159,3 +159,8 @@ See `requirements.txt`.  Install into the `torch2.4_py311` conda environment:
 ```bash
 pip install -r requirements.txt
 ```
+---
+
+## 👍 Acknoledgement
+
+Our pretraining strategy is mostly inspired by [JacksonBurns](https://github.com/JacksonBurns/chemeleon). Thanks a lot for their outstanding works and reporsority!
