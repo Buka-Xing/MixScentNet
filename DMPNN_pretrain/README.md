@@ -13,11 +13,12 @@ DMPNN_pretrain/
 ├── output/                             # Pretraining checkpoints folder
 ├── training_store/                     # Mordred descriptor folder (zarr)
 ├── filter_pubchem_olfactory.py         # filter rules for raw PubChem SMILE.
-├── pubchem_olfactory_1million.smiles   # ~1.17 M curated SMILES
+├── pubchem_olfactory_1million.smiles   # ~1.17 M curated SMILES (Google Drive)
 ├── features_mordred.py                 # compute Mordred descriptors → zarr
 ├── pretrain_mordred.py                 # pre-train D-MPNN via masked descriptor prediction
 └── torchford.py                        # Welford online mean/variance accumulator
 ```
+Download [pubchem_olfactory_1million.smiles](https://drive.google.com/file/d/1OFzbHZ2rGJa4Cwpira2nJz3W-KJ7j0_g/view?usp=drive_link)
 
 ---
 
