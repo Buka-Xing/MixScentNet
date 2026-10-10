@@ -2,7 +2,7 @@
 
 The official code reporsority for MixScentNet, accepted by NeurIPS 2026. The MixScentNet models molecule mixtures as complete graphs, combining self-supervised pretraining on Mordred descriptors with a 3-layer residual GATv2, achieving competitive performance on olfactory label and perceptual distance prediction and reproducing olfactory white.
 
-> **NeurIPS2026** | [Paper]() | [Poster & Video]()
+> **NeurIPS2026** | [Paper]() | [Poster & Video](https://neurips.cc/virtual/2026/loc/sydney/poster/154439) 
 
 <p align="center">
   <img src="MixScentNet_overview.png" width="85%" alt="MixScentNet Framework">
