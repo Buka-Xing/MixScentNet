@@ -104,8 +104,6 @@ def main():
                         after_str=f"{n_string:,}",
                         kept=f"{n_final:,}",
                     )
-                if n_final > 1168920:
-                    break
 
         if pending:
             _flush(pending)
